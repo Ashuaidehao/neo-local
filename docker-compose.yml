@@ -12,7 +12,6 @@ services:
       - neo-faucet
       - neo-python
       - neo-scan-api
-      - neo-scan-sync
       - postgres
     environment:
       - AUTOHEAL_CONTAINER_LABEL=autoheal
@@ -71,7 +70,6 @@ services:
     depends_on:
       - neo-cli-privatenet-1
       - neo-scan-api
-      - neo-scan-sync
     image: 'cityofzion/neo-python:v0.8.4'
     networks:
       - inside
@@ -118,25 +116,6 @@ services:
     ports:
       - '4000:4000'
     restart: always
-
-  neo-scan-sync:
-    container_name: neo-scan-sync
-    depends_on:
-      - postgres
-      - neo-cli-privatenet-1
-    environment:
-      DB_DATABASE: neoscan_prodv
-      DB_HOSTNAME: postgres
-      DB_PASSWORD: postgres
-      DB_USERNAME: postgres
-      NEO_SEEDS: >-
-        http://neo-cli-privatenet-1:30333
-      REPLACE_OS_VARS: 'true'
-    image: 'registry.gitlab.com/cityofzion/neo-scan/sync:latest'
-    links:
-      - 'neo-cli-privatenet-1:30333'
-    networks:
-      - inside
 
   postgres:
     container_name: postgres
