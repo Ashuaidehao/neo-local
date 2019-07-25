@@ -128,3 +128,4 @@ services:
     image: 'library/postgres:12-alpine'
     networks:
       - inside
+    restart: always
