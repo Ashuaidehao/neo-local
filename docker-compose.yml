@@ -16,7 +16,7 @@ services:
       DB_PASSWORD: postgres
       DB_USERNAME: postgres
       NEO_SEEDS: >-
-        http://172.168.3.141:30332
+        http://128.1.61.238:34002
       PORT: 4000
       REPLACE_OS_VARS: 'true'
     healthcheck:
@@ -36,7 +36,7 @@ services:
       - inside
       - host-exposed
     ports:
-      - '4000:4000'
+      - '34000:4000'
     restart: always
 
   postgres:
